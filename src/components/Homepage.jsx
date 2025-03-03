@@ -1,4 +1,4 @@
-// src/components/Homepage.jsx
+
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 
