@@ -31,7 +31,6 @@ const PostDetails = () => {
     return (
         <div className="container mx-auto p-4">
             <div className="card bg-base-100 shadow-xl">
-                {/* DaisyUI card component */}
                 <figure>
                     <img src={post.cover} alt={post.title} className="w-full h-64 object-cover" />
                 </figure>
@@ -45,7 +44,6 @@ const PostDetails = () => {
                         >
                             Update
                         </button>
-                        {/* DaisyUI button component */}
                         <button
                             className="btn btn-error"
                             onClick={() => navigate(`/posts/${postId}/delete`)}

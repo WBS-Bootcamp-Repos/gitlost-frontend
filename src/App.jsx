@@ -1,5 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
 import Homepage from "./components/Homepage.jsx";
+import PostDetails from "./components/PostDetails.jsx";
+import CreatePost from "./components/CreatePost.jsx";
+
 
 const App = () => {
   return (
@@ -7,8 +10,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/posts/:postId" element={<PostDetails />} />
-        {/* <Route path="/create" element={<CreatePost />} />
-        <Route path="/posts/:postId/edit" element={<UpdatePost />} /> */}
+        <Route path="/create" element={<CreatePost />} />
+        {/* <Route path="/posts/:postId/edit" element={<UpdatePost />} /> */}
       </Routes>
     </BrowserRouter>
   );
