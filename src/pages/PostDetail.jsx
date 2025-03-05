@@ -1,33 +1,28 @@
 import { Pen, Trash2, House, ArrowRightFromLine } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { usePosts } from "../context/context";
+import ReactMarkdown from "react-markdown";
 
 const PostDetail = () => {
     const { id } = useParams();
+    console.log("Fetched ID from URL:", id);
+    const { getPost, loading, error } = usePosts();
     const [post, setPost] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchPost = async () => {
-            try {
-                const response = await fetch(
-                    `http://localhost:3001/posts/${id}`
-                );
-                if (!response.ok)
-                    throw new Error("Fehler beim Laden des Posts");
+        console.log("Running useEffect. ID:", id);
+        if (!id) return;
 
-                const data = await response.json();
-                setPost(data); // Speichert den einzelnen Post
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
+        const fetchPost = async () => {
+            console.log("Fetching post with ID:", id);
+            const fetchedPost = await getPost(id);
+            console.log("Fetched Post:", fetchedPost);
+            if (fetchedPost) setPost(fetchedPost);
         };
 
         fetchPost();
-    }, [id]); // Wird neu ausgeführt, wenn sich die ID ändert
+    }, [id]);
 
     if (loading) return <p>Loading post...</p>;
     if (error) return <p>Error: {error}</p>;
@@ -59,108 +54,19 @@ const PostDetail = () => {
             </section>
 
             {/* Blogposts Section */}
-            <section className="blog-section py-14">
+            <section className="blog-section py-14 bg-white">
                 <div className="container mx-auto">
                     {/* Categories, Edit, Delete */}
-                    <div className="flex flex-row justify-between  pb-8">
+                    <div className="flex flex-row justify-between  text-primary  pb-8">
                         <div>Catergories placeholder</div>
-                        <div className="flex flex-row gap-5 text-primary">
+                        <div className="flex flex-row gap-5">
                             <Pen />
                             <Trash2 />
                         </div>
                     </div>
                     {/* Content */}
                     <div className="blog-content grid md:w-8/12 mx-auto">
-                        <p>
-                            If there's one place that completely surprised me,
-                            it's Madeira. I had heard about the island’s
-                            dramatic cliffs and lush landscapes, but nothing
-                            prepared me for how breathtaking it actually is.
-                            From sunrise hikes above the clouds to sipping
-                            Poncha in a tiny seaside bar, Madeira feels like a
-                            secret paradise for adventurers and digital nomads
-                            alike.
-                        </p>
-                        <h3>First Impressions: More Than Just an Island</h3>
-                        <p>
-                            When I arrived in Funchal, Madeira’s charming
-                            capital, I instantly knew this trip was going to be
-                            different. The warm ocean breeze, the scent of
-                            tropical flowers, and the sight of banana trees
-                            growing along the roads—it felt like stepping into a
-                            dream. The first thing I did? Hike the famous Pico
-                            do Arieiro to Pico Ruivo trail. The moment I reached
-                            the summit and watched the sunrise above a sea of
-                            clouds, I realized: Madeira is pure magic.
-                        </p>
-                        <p>Why Madeira?</p>
-                        <ul>
-                            <li>Perfect year-round climate (16-26°C)</li>
-                            <li>Epic hikes with insane views</li>
-                            <li>
-                                A mix of mountains, forests, and ocean—all in
-                                one place
-                            </li>
-                        </ul>
-                        <p>Top Highlights (So Far!):</p>
-                        <ul>
-                            <li>
-                                Pico do Arieiro sunrise hike – 100% worth the
-                                early wake-up call
-                            </li>
-                            <li>
-                                Cabo Girão – Standing on a glass platform 580m
-                                above the ocean? Wild.
-                            </li>
-                            <li>
-                                Fanal Forest – A mystical, fog-covered forest
-                                straight out of a fairytale
-                            </li>
-                        </ul>
-                        <h3>The Unexpected Adventures</h3>
-                        <p>
-                            One night, I found myself at a small local bar,
-                            chatting with an old fisherman who insisted I try
-                            Poncha, the island’s signature drink. Made with
-                            sugarcane rum, honey, and lemon, it packs a punch.
-                            Maybe a little too much—let’s just say my next
-                            morning’s hike started later than planned. Madeira
-                            is also a surfer’s dream. While I’m far from a pro,
-                            I rented a board in Jardim do Mar and tried catching
-                            a few waves. Spoiler: I mostly wiped out. But
-                            watching locals effortlessly carve through the waves
-                            made me want to stay longer, just to get better.
-                        </p>
-                        <p>More Unforgettable Moments:</p>
-                        <ul>
-                            <li>
-                                Canyoning through waterfalls (nothing like
-                                jumping into icy pools to wake you up!)
-                            </li>
-                            <li>
-                                Dolphin watching at sunset – We spotted a whole
-                                pod, and I swear they were racing our boat.
-                            </li>
-                            <li>
-                                Trying ‘Bolo do Caco’ garlic bread – So good I
-                                considered smuggling some home.
-                            </li>
-                        </ul>
-                        <p>Best Time to Visit?</p>
-                        <p>
-                            Madeira is called “the island of eternal spring”, so
-                            honestly, anytime. But April to October is perfect
-                            for outdoor adventures.
-                        </p>
-                        <h3> Final Thoughts: Stay Longer Than Planned</h3>
-                        <p>
-                            I booked a one-week trip to Madeira. I stayed for
-                            three. This island has a way of making you slow
-                            down, take a deep breath, and just enjoy the moment.
-                            If you love adventure, good food, and working
-                            remotely with epic ocean views, Madeira should be on
-                            your list. Would I go back? Without a doubt.
-                        </p>
+                        <ReactMarkdown>{post.content}</ReactMarkdown>
                     </div>
                     {/* Placeholder for more images if needed */}
                     <div className="flex gap-8 py-4">

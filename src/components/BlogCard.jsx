@@ -3,15 +3,11 @@ import { Link } from "react-router";
 
 const BlogCard = ({ title, cover, content, categories, author, date, id }) => {
     return (
-        <div className="w-full border-b border-dark py-8 flex justify-center">
+        <div className="w-full border-b border-dark py-8 flex justify-center  bg-white">
             <div className="grid grid-cols-1 md:grid-cols-12 md:w-10/12 mx-auto gap-6 items-center">
                 <div className="md:col-span-4">
                     <img
-                        src={
-                            cover?.data
-                                ? String.fromCharCode(...cover.data)
-                                : "fallback-image.jpg"
-                        }
+                        src={cover || ""}
                         alt={title}
                         className="w-full h-80 object-cover rounded-lg"
                     />

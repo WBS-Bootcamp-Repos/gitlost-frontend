@@ -1,29 +1,9 @@
-import React, { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import BlogCard from "./BlogCard";
+import { usePosts } from "../context/context";
 
 const BlogList = () => {
-    const [posts, setPosts] = useState([]); // Gespeicherte Posts
-    const [loading, setLoading] = useState(true); // Ladeanzeige
-    const [error, setError] = useState(null); // Fehler-Handling
-
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const response = await fetch("http://localhost:3001/posts");
-                if (!response.ok)
-                    throw new Error("Fehler beim Laden der Posts");
-
-                const data = await response.json();
-                setPosts(data); // Alle Posts auf einmal setzen
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchPosts();
-    }, []); // Leeres Array → wird nur einmal bei Komponentenmounth ausgeführt
+    const { posts, loading, error } = usePosts();
 
     if (loading) return <p>Loading posts...</p>;
     if (error) return <p>Error: {error}</p>;
