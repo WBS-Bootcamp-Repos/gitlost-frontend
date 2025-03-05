@@ -3,19 +3,22 @@ import MainLayout from "./MainLayout";
 import Homepage from "./components/Homepage.jsx";
 import PostDetails from "./components/PostDetails.jsx";
 import CreatePost from "./components/CreatePost.jsx";
-
+import { PostsProvider } from "./context/PostsContext.jsx"; 
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-      <Route path="/" element={<MainLayout />} />
-        <Route path="/" element={<Homepage />} />
-        <Route path="/posts/:postId" element={<PostDetails />} />
-        <Route path="/create" element={<CreatePost />} />
-        {/* <Route path="/posts/:postId/edit" element={<UpdatePost />} /> */}
-      </Routes>
-    </BrowserRouter>
+    <PostsProvider> 
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Homepage />} />
+            <Route path="posts/:postId" element={<PostDetails />} />
+            <Route path="create" element={<CreatePost />} />
+            {/* <Route path="posts/:postId/edit" element={<UpdatePost />} /> */}
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </PostsProvider>
   );
 };
 
