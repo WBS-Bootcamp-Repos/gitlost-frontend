@@ -2,3 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+.blog-content {
+    @apply text-lg leading-relaxed text-dark;
+}
+
+.blog-content h3 {
+    @apply text-3xl font-black mt-8 font-heading pb-5;
+}
+
+.blog-content ul {
+    @apply list-disc list-inside space-y-2 pb-5;
+}
+
+.blog-content li {
+    @apply pl-4;
+}
+
+.blog-content p {
+    @apply mb-4;
+}
