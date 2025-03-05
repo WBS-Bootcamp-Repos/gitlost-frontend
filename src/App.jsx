@@ -12,8 +12,8 @@ const App = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<MainLayout />}>
-                        <Route index element={<Homepage />} />
-                        <Route path="posts/:postId" element={<PostDetails />} />
+                        <Route index element={<Home />} />
+                        <Route path="posts/:id" element={<PostDetail />} />
                         <Route path="create" element={<CreatePost />} />
                         {/* <Route path="posts/:postId/edit" element={<UpdatePost />} /> */}
                     </Route>
