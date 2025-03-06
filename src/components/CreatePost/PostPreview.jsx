@@ -1,14 +1,9 @@
-import React from 'react';
-import ReactMarkdown from 'react-markdown';
+import React from "react";
 import { House, PenLine, X, ArrowRight } from "lucide-react";
+import MarkdownRenderer from "../MarkdownRenderer";
 
 /**
- * Renders a preview of what the post will look like when published
- * @param {Object} props - Component props
- * @param {Object} props.formData - The form data for the post
- * @param {Array<string>} props.additionalImages - Array of additional image URLs
- * @param {Function} props.navigate - React Router navigate function
- * @param {Function} props.togglePreview - Function to toggle preview mode
+ * PostPreview component for displaying a preview of the post being created
  */
 const PostPreview = ({ formData, additionalImages, navigate, togglePreview }) => (
     <div className="preview-mode">
@@ -49,14 +44,11 @@ const PostPreview = ({ formData, additionalImages, navigate, togglePreview }) =>
 
                 {/* Content Preview */}
                 <div className="blog-content grid md:w-8/12 mx-auto">
-                    {/* Fix for hydration issues: Wrap ReactMarkdown in a div instead of p */}
-                    <div className="markdown-content">
-                        {formData.content ? (
-                            <ReactMarkdown>{formData.content}</ReactMarkdown>
-                        ) : (
-                            <p className="text-gray-400 italic">Your content will appear here...</p>
-                        )}
-                    </div>
+                    {formData.content ? (
+                        <MarkdownRenderer content={formData.content} className="max-w-none" />
+                    ) : (
+                        <p className="text-gray-400 italic">Your content will appear here...</p>
+                    )}
                 </div>
 
                 {/* Additional Images Preview - Matching PostDetail layout */}
