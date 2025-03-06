@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 import { usePosts } from "../context/context";
-import ReactMarkdown from "react-markdown";
+import MarkdownRenderer from "../components/MarkdownRenderer";
 import { parseImages, formatImagesForStorage, isValidImageUrl } from "../utils/imageUtils";
 import { 
     House, 
@@ -294,14 +294,11 @@ const PostPreview = ({ formData, additionalImages, navigate, togglePreview }) =>
 
                 {/* Content Preview */}
                 <div className="blog-content grid md:w-8/12 mx-auto">
-                    {/* Fix for hydration issues: Wrap ReactMarkdown in a div instead of p */}
-                    <div className="markdown-content">
-                        {formData.content ? (
-                            <ReactMarkdown>{formData.content}</ReactMarkdown>
-                        ) : (
-                            <p className="text-gray-400 italic">Your content will appear here...</p>
-                        )}
-                    </div>
+                    {formData.content ? (
+                        <MarkdownRenderer content={formData.content} className="max-w-none" />
+                    ) : (
+                        <p className="text-gray-400 italic">Your content will appear here...</p>
+                    )}
                 </div>
 
                 {/* Additional Images Preview - Matching PostDetail layout */}
