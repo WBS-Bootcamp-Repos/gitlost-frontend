@@ -8,7 +8,7 @@ const Home = () => {
             <section
                 className="relative w-full h-screen bg-cover bg-center bg-no-repeat"
                 style={{
-                    backgroundImage: "url('/src/assets/hero-bg.jpg')",
+                    backgroundImage: "url('/src/assets/hero-bg.webp')",
                 }}>
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-black/30"></div>
