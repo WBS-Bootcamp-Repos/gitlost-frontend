@@ -9,7 +9,7 @@ const BlogList = () => {
     if (error) return <p>Error: {error}</p>;
 
     return (
-        <div className="container mx-auto pb-10">
+        <div className="container mx-auto p-10 rounded bg-white">
             {posts.length > 0 ? (
                 posts.map((post) => <BlogCard key={post.id} {...post} />)
             ) : (
