@@ -1,6 +1,6 @@
 import { ArrowRightFromLine } from "lucide-react";
 import { Link } from "react-router";
-import ReactMarkdown from "react-markdown";
+import MarkdownRenderer from "./MarkdownRenderer";
 
 const BlogCard = ({ title, cover, content, categories, author, date, id }) => {
     return (
@@ -37,16 +37,15 @@ const BlogCard = ({ title, cover, content, categories, author, date, id }) => {
                         By {author}, {new Date(date).toLocaleDateString()}
                     </p>
 
-                    {/* Content preview */}
+                    {/* Content preview using MarkdownRenderer */}
                     <div className="text-dark text-base leading-relaxed py-6">
-    <div className="prose prose-lg max-w-none">
-        <ReactMarkdown>
-            {content.length > 500
-                ? content.slice(0, content.lastIndexOf(" ", 500)) + "..."
-                : content}
-        </ReactMarkdown>
-    </div>
-</div>
+                        <MarkdownRenderer 
+                            content={content.length > 500
+                                ? content.slice(0, content.lastIndexOf(" ", 500)) + "..."
+                                : content} 
+                            className="prose-sm" 
+                        />
+                    </div>
 
                     {/* Continue Reading Button */}
                     <Link

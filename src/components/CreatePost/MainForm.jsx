@@ -2,7 +2,7 @@ import React from 'react';
 import { House, Eye, ArrowRight } from "lucide-react";
 import FormInputs from './FormInputs';
 import MarkdownEditor from './MarkdownEditor';
-import AdditionalImagesSection from './AdditionalImagesSection';
+import AdditionalImagesSection from './AdditionalImages';
 import { isValidImageUrl } from '../../utils/imageUtils';
 
 /**
