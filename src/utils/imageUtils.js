@@ -6,31 +6,18 @@
 const SEPARATOR = '|';
 
 /**
- * Parse the cover string into separate image URLs
- * @param {string} coverString - The combined image URLs string
- * @returns {object} An object with cover and additional images
+ * Parse the combined image string into separate URLs
+ * @param {string} combinedImageString - String containing all image URLs
+ * @returns {Object} Object with cover and additional image URLs
  */
-export const parseImages = (coverString) => {
-  if (!coverString) {
-    return { 
-      cover: '', 
-      additionalImages: ['', '', ''] 
-    };
-  }
+export const parseImages = (combinedImageString) => {
+  if (!combinedImageString) return { cover: '', additionalImages: [] };
   
-  const imageUrls = coverString.split(SEPARATOR);
-  const mainCover = imageUrls[0] || '';
-  
-  // Initialize additionalImages with empty strings or the provided values
-  const additionalImages = [
-    imageUrls[1] || '',
-    imageUrls[2] || '',
-    imageUrls[3] || ''
-  ];
+  const images = combinedImageString.split('|').filter(url => url.trim());
   
   return {
-    cover: mainCover,
-    additionalImages
+    cover: images[0] || '',
+    additionalImages: images.slice(1) || []
   };
 };
 
