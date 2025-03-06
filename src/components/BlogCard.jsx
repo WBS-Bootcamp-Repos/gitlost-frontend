@@ -38,16 +38,15 @@ const BlogCard = ({ title, cover, content, categories, author, date, id }) => {
                     </p>
 
                     {/* Content preview */}
-                    <p className="text-dark text-base leading-relaxed py-6">
-                        <ReactMarkdown>
-                            {content.length > 500
-                                ? content.slice(
-                                      0,
-                                      content.lastIndexOf(" ", 500)
-                                  ) + "..."
-                                : content}
-                        </ReactMarkdown>
-                    </p>
+                    <div className="text-dark text-base leading-relaxed py-6">
+    <div className="prose prose-lg max-w-none">
+        <ReactMarkdown>
+            {content.length > 500
+                ? content.slice(0, content.lastIndexOf(" ", 500)) + "..."
+                : content}
+        </ReactMarkdown>
+    </div>
+</div>
 
                     {/* Continue Reading Button */}
                     <Link

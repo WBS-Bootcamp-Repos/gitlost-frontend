@@ -8,7 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
 import { usePosts } from "../context/context";
-import ReactMarkdown from "react-markdown";
+import MarkdownRenderer from "../components/MarkdownRenderer";
 
 const PostDetail = () => {
     const { id } = useParams();
@@ -100,8 +100,8 @@ const PostDetail = () => {
                         </div>
                     </div>
                     {/* Content */}
-                    <div className="blog-content grid md:w-8/12 mx-auto ">
-                        <ReactMarkdown>{post.content}</ReactMarkdown>
+                    <div className="blog-content grid md:w-8/12 mx-auto">
+                        <MarkdownRenderer content={post.content} className="max-w-none" />
                     </div>
                     {/* Placeholder for more images if needed */}
                     <div className="flex gap-8 py-4">
