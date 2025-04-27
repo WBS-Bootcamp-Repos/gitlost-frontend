@@ -1,11 +1,22 @@
-import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router';
+import MainLayout from "./MainLayout";
+import Homepage from "./components/Homepage.jsx";
+import PostDetails from "./components/PostDetails.jsx";
+import CreatePost from "./components/CreatePost.jsx";
+
 
 const App = () => {
   return (
-    <div>
-      <h1 className="text-7xl font-bold text-white">Travel Blog Frontend Interface</h1>
-    </div>
-  )
-}
+    <BrowserRouter>
+      <Routes>
+      <Route path="/" element={<MainLayout />} />
+        <Route path="/" element={<Homepage />} />
+        <Route path="/posts/:postId" element={<PostDetails />} />
+        <Route path="/create" element={<CreatePost />} />
+        {/* <Route path="/posts/:postId/edit" element={<UpdatePost />} /> */}
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
-export default App
+export default App;
